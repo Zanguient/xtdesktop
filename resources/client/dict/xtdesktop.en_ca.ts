@@ -1915,5 +1915,9 @@ Are you sure that you really want to Continue?.</source>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Manual Refresh Comment Console</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
