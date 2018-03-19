@@ -276,26 +276,33 @@ SELECT
 -- Quote Head
         WHEN comment_source = 'Q' THEN
         (
-               SELECT 'Quote#: ' || quhead_number || ' - Customer: ' ||  cust_number || ' - ' || cust_name
-               FROM quhead, custinfo
-               WHERE quhead_cust_id = cust_id
-                     AND quhead_id = comment_source_id
-                     AND comment_source = 'Q'
+               SELECT 'Quote#: ' || quhead_number ||
+                      CASE WHEN cust_id IS NOT NULL THEN ' - Customer: ' ELSE ' - Prospect: ' END ||
+                      COALESCE(cust_number, prospect_number) || ' - ' ||
+                      COALESCE(cust_name, prospect_name)
+               FROM quhead
+               LEFT OUTER JOIN custinfo ON quhead_cust_id = cust_id
+               LEFT OUTER JOIN prospect ON quhead_cust_id = prospect_id
+               WHERE quhead_id = comment_source_id
+                 AND comment_source = 'Q'
         )
 -- Quote Item
         WHEN comment_source = 'QI' THEN
         (
-                SELECT 'Quote#:  ' || quhead_number || '  Customer  ' || cust_number || ' - ' ||
-                        cust_name || '  Line #: ' || quitem_linenumber || ' - ' || ' Item#: ' || item_number || ' - ' || item_descrip1 || ' - Order Qty: '                        || formatQty(quitem_qtyord)
-                     FROM quhead, quitem, item, itemsite, custinfo
-
-                 WHERE
-                      quitem_quhead_id = quhead_id
-                      AND quhead_cust_id = cust_id
-                      AND quitem_itemsite_id = itemsite_id
-                      AND itemsite_item_id = item_id
-                      AND quitem_id = comment_source_id
-                      AND comment_source = 'QI'
+                SELECT 'Quote#:  ' || quhead_number ||
+                       CASE WHEN cust_id IS NOT NULL THEN '  Customer  ' ELSE '  Prospect  ' END ||
+                       COALESCE(cust_number, prospect_number) || ' - ' ||
+                       COALESCE(cust_name, prospect_name) || '  Line #: ' || quitem_linenumber ||
+                       ' - ' || ' Item#: ' || item_number || ' - ' || item_descrip1 ||
+                       ' - Order Qty: ' || formatQty(quitem_qtyord)
+                     FROM quitem
+                     JOIN quhead ON quitem_quhead_id = quhead_id
+                     JOIN itemsite ON quitem_itemsite_id = itemsite_id
+                     JOIN item ON itemsite_item_id = item_id
+                     LEFT OUTER JOIN custinfo ON quitem_cust_id = cust_id
+                     LEFT OUTER JOIN prospect ON quitem_prospect_id = prospect_id
+                 WHERE quitem_id = comment_source_id
+                   AND comment_source = 'QI'
         )
 -- Return Auth Head
   <? if exists("xtmfg_exist") ?>
