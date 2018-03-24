@@ -525,32 +525,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/desktopMenuBar.js" line="63"/>
+        <location filename="../scripts/desktopMenuBar.js" line="72"/>
         <source> &gt; </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/desktopMenuBar.js" line="127"/>
+        <location filename="../scripts/desktopMenuBar.js" line="136"/>
         <source>Edit Shortcuts...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/desktopMenuBar.js" line="161"/>
+        <location filename="../scripts/desktopMenuBar.js" line="170"/>
         <source>Insufficient Privileges</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/desktopMenuBar.js" line="161"/>
+        <location filename="../scripts/desktopMenuBar.js" line="170"/>
         <source>You have insufficient permissions for this action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/desktopMenuBar.js" line="163"/>
+        <location filename="../scripts/desktopMenuBar.js" line="172"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/desktopMenuBar.js" line="163"/>
+        <location filename="../scripts/desktopMenuBar.js" line="172"/>
         <source>Could not find the shortcut action</source>
         <translation type="unfinished"></translation>
     </message>
