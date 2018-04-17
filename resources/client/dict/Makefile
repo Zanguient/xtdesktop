@@ -5,7 +5,6 @@ all:
 
 	lupdate -no-obsolete ts.pro
 	lrelease ts.pro
-	rm ts.pro
 
 	echo '<qm>' > translations.xml
 
@@ -16,3 +15,7 @@ all:
 	done
 
 	echo '</qm>' >> translations.xml
+
+clean:
+	rm -f *.qm
+	rm -f translations.xml ts.pro
