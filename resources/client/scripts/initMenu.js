@@ -38,7 +38,6 @@ var _open = qsTr("Open...");
 var _dtTimer = new QTimer(mainwindow);
 var _windows = new Array();
 var _vToolBarActions      = []; // used only in addToolBarAction()
-var showDashboardAnything = false;
 
 var _mainMenu;
 var _employee;
@@ -76,7 +75,7 @@ if (_desktopParent)
   setupDesktopMenu();
 
   // Set up browser for Welcome Page
-  var _welcome = new QWebView(mainwindow);
+  var _welcome = new QWebEngineView(mainwindow);
   var welcomeUrl = (function () {
       var string       = mainwindow.databaseURL().split("/"),
           hostName     = string[2].substring(0, string[2].indexOf(":")),
@@ -104,23 +103,8 @@ if (_desktopParent)
   _welcome["loadFinished(bool)"].connect(loadLocalHtml);
   _welcome["linkClicked(const QUrl &)"].connect(openUrl);
   _welcome.load(welcomeUrl);
-  _welcome.page().linkDelegationPolicy = QWebPage.DelegateAllLinks;
   _desktopStack.addWidget(_welcome);
   addToolBarAction(qsTr("Welcome"), "home_32");
-
-  if (showDashboardAnything) {
-    var _home = new QWebView(mainwindow);
-    _home["loadFinished(bool)"].connect(missingxTupleServer);
-    _home["linkClicked(const QUrl &)"].connect(openUrl);
-    var homeURL = "https://" + metrics.value("WebappHostname")
-                + ":" + metrics.value("WebappPort")
-                + "/" + mainwindow.databaseURL().split("/")[3];
-                + "/npm/xtuple-dashboard-anything/public/index.html";
-    _home.load(new QUrl(homeURL));
-    _home.page().linkDelegationPolicy = QWebPage.DelegateAllLinks;
-    _desktopStack.addWidget(_home);
-    addToolBarAction(qsTr("Dashboard"), "home_32");
-  }
 
   // Initialize additional desktop UIs and Dock Widgets
   // (Init functions come from the code pulled in by the include statements)
@@ -236,21 +220,6 @@ function loadLocalHtml(ok)
     q.first();
     _welcome.setHtml(q.value("html"));
   }
-  // We don't want to deal with loading any more web pages.  Let OS do it
-  _welcome.page().linkDelegationPolicy = QWebPage.DelegateAllLinks;;
-}
-
-function missingxTupleServer(ok)
-{
-  if (!ok)
-  {
-    // xTuple Server is not available or didn't load, so load internal HTML saying we aren't connected
-    var q = toolbox.executeQuery("SELECT xtdesktop.fetchxTupleServerHtml() AS html");
-    q.first();
-    _home.setHtml(q.value("html"));
-  }
-  // We don't want to deal with loading any more web pages.  Let OS do it
-  _home.page().linkDelegationPolicy = QWebPage.DelegateAllLinks;;
 }
 
 /*!
