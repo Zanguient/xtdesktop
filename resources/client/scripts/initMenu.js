@@ -101,7 +101,6 @@ if (_desktopParent)
     })();
   _welcome.objectName = "_welcome";
   _welcome["loadFinished(bool)"].connect(loadLocalHtml);
-  _welcome["linkClicked(const QUrl &)"].connect(openUrl);
   _welcome.load(welcomeUrl);
   _desktopStack.addWidget(_welcome);
   addToolBarAction(qsTr("Welcome"), "home_32");
