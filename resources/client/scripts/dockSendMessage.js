@@ -168,7 +168,8 @@ function fillListCommentConsole()
               + "               WHERE relname = 'rev') AS hasRev,"
               + "       EXISTS(SELECT 1 FROM pkghead WHERE pkghead_name = 'xtmfg') AS hasMFG,"
               + "       EXISTS(SELECT 1 FROM pkghead WHERE pkghead_name = 'asset') AS hasAsset,"
-              + "       EXISTS(SELECT 1 FROM pkghead WHERE pkghead_name = 'assetmaint') AS hasMaint"
+              + "       EXISTS(SELECT 1 FROM pkghead WHERE pkghead_name = 'assetmaint') AS hasMaint, "
+              + "       LEFT(fetchmetrictext('ServerVersion'),1)::INT AS xtVersion "
               + ";";
 
   params.startOffSet = ((preferences.value("MonitoredCommentStrtDate") != '')?preferences.value("MonitoredCommentStrtDate"):-1);
@@ -186,6 +187,8 @@ function fillListCommentConsole()
       params.asset_exist = 'hasAsset';
     if (data.value("hasMaint"))
       params.maint_exist = 'hasMaint';
+    if (data.value("xtVersion") == 5)
+      params.version5 = 'isVersion5';
   }
   else if (data.lastError().type != QSqlError.NoError)
   {

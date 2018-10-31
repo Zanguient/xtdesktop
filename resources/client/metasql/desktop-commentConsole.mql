@@ -1,7 +1,7 @@
 -- Group: desktop
 -- Name:  commentConsole
 -- Notes: Comment Console Query - update for OPP in 3.8
--- Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+-- Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
 -- See www.xtuple.com/CPAL for the full text of the software license.
 
 SELECT
@@ -118,26 +118,22 @@ SELECT
                   AND (comment_source = 'BOI')))
  <? endif ?>
 
--- T  Contact
+-- Contact
         WHEN comment_source = 'T' THEN
              (SELECT cntct_first_name || ' ' || cntct_last_name FROM cntct
                      WHERE cntct_id = comment_source_id
                            AND comment_source = 'T'
               )
 -- Opportunity
--- Put this back in after 3.8.0
-/*
-	WHEN comment_source = 'OPP'  THEN
-              (
-               SELECT ophead_name || ' Account: ' || crmacct_number || ' - ' || crmacct_name || ' Priority: ' || incdtpriority_name || ' - ' || ' Assigned To: ' || ophead_username
-               FROM ophead
-                    LEFT OUTER JOIN crmacct ON (ophead_crmacct_id = crmacct_id)
-                    LEFT OUTER JOIN incdtpriority ON (ophead_priority_id = incdtpriority_id)
-               WHERE
-                    comment_source = 'OPP'
-                    AND comment_source_id = ophead_id
-	      )
-*/
+        WHEN comment_source = 'OPP'  THEN
+            (
+             SELECT ophead_name || ' Account: ' || crmacct_number || ' - ' || crmacct_name || ' Priority: ' || incdtpriority_name || ' - ' || ' Assigned To: ' || ophead_username
+             FROM ophead
+             LEFT OUTER JOIN crmacct ON (ophead_crmacct_id = crmacct_id)
+             LEFT OUTER JOIN incdtpriority ON (ophead_priority_id = incdtpriority_id)
+             WHERE comment_source = 'OPP'
+               AND comment_source_id = ophead_id
+	 )
 -- Customer
         WHEN comment_source = 'C' THEN
               (SELECT cust_number || ' - ' || cust_name FROM custinfo WHERE (cust_id = comment_source_id) AND (comment_source = 'C'))
@@ -342,6 +338,14 @@ SELECT
 
 -- Task
         WHEN comment_source = 'TA' THEN
+          <? if exists('version5') ?>
+               (
+                 SELECT task_name || '-' || task_descrip
+                 FROM task
+                 WHERE task_id = comment_source_id
+                   AND comment_source = 'TA'
+               )
+          <? else ?>
                (
                  SELECT prj_number || '-' || prjtask_number || '-' || prjtask_name || '-' || prjtask_descrip
                  FROM prjtask, prj
@@ -349,16 +353,24 @@ SELECT
                     AND(prjtask_id = comment_source_id)
                     AND(comment_source = 'TA'))
                )
-
+          <? endif ?>
 --TodoItem
         WHEN comment_source = 'TD' THEN
+          <? if exists('version5') ?>
+               (
+                 SELECT task_name || '-' || task_descrip
+                 FROM task
+                 WHERE task_id = comment_source_id
+                   AND comment_source = 'TD'
+               )
+          <? else ?>
                (
                  SELECT todoitem_name || '-' || todoitem_description
                  FROM todoitem
                  WHERE((todoitem_id = comment_source_id)
                     AND(comment_source = 'TD'))
                )
-
+          <? endif ?>
 --Transfer Order Header
   <? if exists("xtmfg_exist") ?>
         WHEN comment_source = 'TO' THEN
