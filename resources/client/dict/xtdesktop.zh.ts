@@ -1703,10 +1703,6 @@
         <source>Desktop</source>
         <translation>桌面</translation>
     </message>
-    <message>
-        <source>Dashboard</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>preferencesComment</name>

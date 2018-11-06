@@ -2027,17 +2027,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/dockSendMessage.js" line="192"/>
+        <location filename="../scripts/dockSendMessage.js" line="195"/>
         <source>Database Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/dockSendMessage.js" line="324"/>
+        <location filename="../scripts/dockSendMessage.js" line="327"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/dockSendMessage.js" line="328"/>
+        <location filename="../scripts/dockSendMessage.js" line="331"/>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2093,27 +2093,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/initMenu.js" line="46"/>
+        <location filename="../scripts/initMenu.js" line="45"/>
         <source>Desktop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/initMenu.js" line="51"/>
+        <location filename="../scripts/initMenu.js" line="50"/>
         <source>Setup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/initMenu.js" line="109"/>
+        <location filename="../scripts/initMenu.js" line="112"/>
         <source>Welcome</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/initMenu.js" line="122"/>
-        <source>Dashboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../scripts/initMenu.js" line="167"/>
+        <location filename="../scripts/initMenu.js" line="156"/>
         <source>Sites</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2396,8 +2391,8 @@ Are you sure that you really want to Continue?.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scripts/userPreferences.js" line="76"/>
-        <location filename="../scripts/userPreferences.js" line="88"/>
+        <location filename="../scripts/userPreferences.js" line="78"/>
+        <location filename="../scripts/userPreferences.js" line="90"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>

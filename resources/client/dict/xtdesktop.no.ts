@@ -1686,10 +1686,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dashboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Sites</source>
         <translation type="unfinished"></translation>
     </message>
