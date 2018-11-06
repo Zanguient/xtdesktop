@@ -1703,10 +1703,6 @@
         <source>Welcome</source>
         <translation>Accueil</translation>
     </message>
-    <message>
-        <source>Dashboard</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>preferencesComment</name>
