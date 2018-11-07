@@ -2,7 +2,7 @@ CREATE OR REPLACE FUNCTION xtdesktop.usersonline()
  RETURNS SETOF xtdesktop.usersonline
  AS
 $BODY$
--- Copyright (c) 1999-2016 by OpenMFG LLC, d/b/a xTuple.
+-- Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
 -- See www.xtuple.com/CPAL for the full text of the software license.
 DECLARE
  _row xtdesktop.usersonline%ROWTYPE;
