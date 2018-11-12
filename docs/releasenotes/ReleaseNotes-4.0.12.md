@@ -12,7 +12,10 @@ of xTuple ERP (www.xtuple.com/CPAL).
 The xTuple Desktop 4.0 release adds a modern visual theme to the
 xTuple ERP desktop client application.
 
-### Bug Fixes
+### Features
 
 - Implemented issue #[33692](http://www.xtuple.org/xtincident/view/bugs/33692) _Manual refresh comment console should be ON by default_
+
+### Bug Fixes
+
 - Fixed issue #[34087](http://www.xtuple.org/xtincident/view/bugs/34087) _Window Close, Minimize and Maximize symbols are not visible on the top right corner of the Window_
