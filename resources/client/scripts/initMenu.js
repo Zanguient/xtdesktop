@@ -114,6 +114,13 @@ if (_desktopParent)
   // Initialize additional desktop UIs and Dock Widgets
   // (Init functions come from the code pulled in by the include statements)
   addDesktop("desktopCRM", "clients_32", "ViewCRMDesktop");
+
+  if (mainwindow.findChild("menu.crm.tasks"))
+  {
+    mainwindow.findChild("_todo").actionName = "crm.taskList";
+    mainwindow.findChild("_todoCalendar").actionName = "crm.taskListCalendar";
+  }
+
   initDockTodo();
   initDockAccounts();
   initDockMyCntcts();
