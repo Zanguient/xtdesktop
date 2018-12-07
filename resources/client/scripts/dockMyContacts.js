@@ -66,8 +66,12 @@ function fillListMyCntcts()
   if (!_dockMycontacts.visible)
     return;
 
+  var params = {};
+  if (metrics.value('ServerVersion').charAt(0) >= 5)
+    params.version5 = true;
+
   _contactList = mainwindow.findChild("_contactList");
-  _contactList.populate(toolbox.executeDbQuery("desktop", "contacts"));
+  _contactList.populate(toolbox.executeDbQuery("desktop", "contacts", params));
 }
 
 /*! 

@@ -62,8 +62,12 @@ function initDockAccounts()
     if (! _dockMyaccounts || ! _accountList || !_dockMyaccounts.visible || !_accountListIsDirty)
       return;
 
+    var params = {owner_username: mainwindow.username()};
+    if (metrics.value('ServerVersion').charAt(0) >= 5)
+      params.version5 = true;
+
     _accountList.populate(toolbox.executeDbQuery("desktop", "crmaccounts",
-                                                 { owner_username: mainwindow.username()} ));
+                                                 params ));
 
     _accountListIsDirty = false;
   }
