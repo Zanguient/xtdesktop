@@ -5,10 +5,13 @@
 -- See www.xtuple.com/CPAL for the full text of the software license.
 
 SELECT 
-  cntct_id AS id, crmacct_number, crmacct_name,
-  cntct.*, addr.*
-FROM cntct 
-  LEFT OUTER JOIN crmacct ON (crmacct_cntct_id_1=cntct_id) 
+  cntct_id AS id, cntct_name, getcontactphone(cntct_id) as cntct_phone, cntct_email,
+  addr_line1, addr_city, addr_state, addr_country, addr_postalcode,
+  regexp_replace(array_agg(DISTINCT crmacct_number)::TEXT, '\{|\}|\"|NULL', '', 'g') AS crmacct_number
+FROM cntct
+  LEFT OUTER JOIN crmacct ON (cntct_id = getcrmaccountcontact(crmacct_id))
   LEFT OUTER JOIN addr ON (cntct_addr_id=addr_id) 
 WHERE (cntct_owner_username=getEffectiveXtUser())
+GROUP BY cntct_id, cntct_name, cntct_phone, cntct_email,
+  addr_line1, addr_city, addr_state, addr_country, addr_postalcode
 ORDER BY cntct_name;
