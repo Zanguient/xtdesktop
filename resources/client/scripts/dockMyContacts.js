@@ -21,8 +21,7 @@ function initDockMyCntcts()
 
   // Set columns on list
   _contactList.addColumn(qsTr("Name"), -1, Qt.AlignLeft  , true, "cntct_name" );
-  _contactList.addColumn(qsTr("Account#"), XTreeWidget.itemColumn, Qt.AlignLeft, false, "crmacct_number");
-  _contactList.addColumn(qsTr("Account Name"), -1, Qt.AlignLeft,  false, "crmacct_name");
+  _contactList.addColumn(qsTr("Account(s)"), XTreeWidget.itemColumn, Qt.AlignLeft, false, "crmacct_number");
   _contactList.addColumn(qsTr("Phone"), -1, Qt.AlignLeft, true, "cntct_phone" );
   _contactList.addColumn(qsTr("Email"), -1, Qt.AlignLeft, false, "cntct_email" );
   _contactList.addColumn(qsTr("Address"), -1, Qt.AlignLeft  , false, "addr_line1" );
@@ -67,8 +66,12 @@ function fillListMyCntcts()
   if (!_dockMycontacts.visible)
     return;
 
+  var params = {};
+  if (metrics.value('ServerVersion').charAt(0) >= 5)
+    params.version5 = true;
+
   _contactList = mainwindow.findChild("_contactList");
-  _contactList.populate(toolbox.executeDbQuery("desktop", "contacts"));
+  _contactList.populate(toolbox.executeDbQuery("desktop", "contacts", params));
 }
 
 /*! 
